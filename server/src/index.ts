@@ -8,9 +8,24 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// Middleware - Fix CORS to handle invalid characters
+const getFrontendUrl = () => {
+  const url = process.env.FRONTEND_URL;
+  if (!url) return '*';
+  
+  // Remove any invalid characters and ensure it's a valid URL
+  const cleaned = url.trim().replace(/[^\w\s\-.:\/]/g, '');
+  
+  // If it doesn't start with http, add https://
+  if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://')) {
+    return `https://${cleaned}`;
+  }
+  
+  return cleaned;
+};
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: getFrontendUrl(),
   credentials: true
 }));
 app.use(express.json());
