@@ -137,7 +137,7 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
   console.log('📧 Sending notification email to recipient:', recipientEmail);
 
   try {
-    await resend.emails.send({
+    const emailResult = await resend.emails.send({
       from: 'DigiEmp <onboarding@resend.dev>', // You'll need to verify a domain in Resend
       to: recipientEmail,
       reply_to: data.email,
