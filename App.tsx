@@ -312,7 +312,13 @@ const App = () => {
     
     try {
       // Use environment variable or default to localhost in development
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      let apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      
+      // Ensure URL has protocol
+      if (apiUrl && !apiUrl.startsWith('http://') && !apiUrl.startsWith('https://')) {
+        apiUrl = `https://${apiUrl}`;
+      }
+      
       console.log('Sending to:', `${apiUrl}/api/contact`);
       console.log('Data:', data);
       
