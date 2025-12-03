@@ -32,7 +32,7 @@ export const sendConfirmationEmailResend = async (data: ContactFormData): Promis
   try {
     await resend.emails.send({
       from: 'DigiEmp <onboarding@resend.dev>', // You'll need to verify a domain in Resend
-      to: data.email,
+      to: data.email.toLowerCase().trim(), // Normalize email address
       subject: 'Thank you for contacting DigiEmp!',
       html: `
         <!DOCTYPE html>
@@ -137,9 +137,13 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
   console.log('📧 Sending notification email to recipient:', recipientEmail);
 
   try {
+    console.log('📧 Resend API Key present:', !!process.env.RESEND_API_KEY);
+    console.log('📧 Sending to recipient:', recipientEmail);
+    console.log('📧 From address: DigiEmp <onboarding@resend.dev>');
+    
     const emailResult = await resend.emails.send({
       from: 'DigiEmp <onboarding@resend.dev>', // You'll need to verify a domain in Resend
-      to: recipientEmail,
+      to: recipientEmail.toLowerCase().trim(), // Normalize email address
       reply_to: data.email,
       subject: `New Project Request from ${data.name} - ${data.service}`,
       html: `
