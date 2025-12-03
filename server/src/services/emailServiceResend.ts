@@ -140,6 +140,7 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
     console.log('📧 Resend API Key present:', !!process.env.RESEND_API_KEY);
     console.log('📧 Sending to recipient:', recipientEmail);
     console.log('📧 From address: DigiEmp <onboarding@resend.dev>');
+    console.log('📧 Subject: New Project Request from', data.name);
     
     const emailResult = await resend.emails.send({
       from: 'DigiEmp <onboarding@resend.dev>', // You'll need to verify a domain in Resend
@@ -257,7 +258,9 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
         </html>
       `,
     });
-    console.log('✅ Email sent successfully via Resend to:', recipientEmail);
+    console.log('✅ Notification email sent successfully via Resend to:', recipientEmail);
+    console.log('✅ Email subject: New Project Request from', data.name);
+    console.log('✅ Resend response:', JSON.stringify(emailResult, null, 2));
   } catch (error: any) {
     console.error('❌ Error sending email via Resend:', error);
     console.error('❌ Error details:', JSON.stringify(error, null, 2));
