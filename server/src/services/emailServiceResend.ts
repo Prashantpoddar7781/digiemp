@@ -137,7 +137,7 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
     await resend.emails.send({
       from: 'DigiEmp <onboarding@resend.dev>', // You'll need to verify a domain in Resend
       to: recipientEmail,
-      replyTo: data.email,
+      reply_to: data.email,
       subject: `New Project Request from ${data.name} - ${data.service}`,
       html: `
         <!DOCTYPE html>
