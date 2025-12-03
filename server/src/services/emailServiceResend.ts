@@ -254,8 +254,10 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
       `,
     });
     console.log('✅ Email sent successfully via Resend to:', recipientEmail);
-  } catch (error) {
+    console.log('📬 Resend email ID:', result.id);
+  } catch (error: any) {
     console.error('❌ Error sending email via Resend:', error);
+    console.error('❌ Error details:', JSON.stringify(error, null, 2));
     throw error;
   }
 };

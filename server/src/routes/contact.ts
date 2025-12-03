@@ -28,23 +28,35 @@ contactRouter.post('/', async (req, res) => {
       console.log('Using Resend for email delivery');
       console.log('Recipient email:', process.env.RECIPIENT_EMAIL);
       
-      // Send notification email to recipient (you)
-      await sendContactEmailResend({
-        name,
-        phone,
-        email,
-        service,
-        message
-      });
+      // Send notification email to recipient (you) - this is the important one
+      try {
+        await sendContactEmailResend({
+          name,
+          phone,
+          email,
+          service,
+          message
+        });
+        console.log('✅ Notification email sent to recipient');
+      } catch (error) {
+        console.error('❌ Failed to send notification email to recipient:', error);
+        throw error; // Re-throw to return error to user
+      }
       
-      // Send confirmation email to sender
-      await sendConfirmationEmailResend({
-        name,
-        phone,
-        email,
-        service,
-        message
-      });
+      // Send confirmation email to sender (optional - don't fail if this fails)
+      try {
+        await sendConfirmationEmailResend({
+          name,
+          phone,
+          email,
+          service,
+          message
+        });
+        console.log('✅ Confirmation email sent to sender');
+      } catch (error) {
+        console.error('⚠️ Failed to send confirmation email (non-critical):', error);
+        // Don't throw - confirmation email failure is not critical
+      }
     } else {
       console.log('Using SMTP for email delivery');
       // Send email via SMTP (this will send both the notification to you and confirmation to sender)
