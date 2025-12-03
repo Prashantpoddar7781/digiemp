@@ -9,51 +9,38 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware - Fix CORS to allow Vercel production and preview URLs
-const getAllowedOrigins = () => {
-  const frontendUrl = process.env.FRONTEND_URL;
-  const allowedOrigins = ['https://digiemp.vercel.app'];
-  
-  // Add production URL if provided
-  if (frontendUrl) {
-    const cleaned = frontendUrl.trim().replace(/[^\w\s\-.:\/]/g, '');
-    if (cleaned.startsWith('http://') || cleaned.startsWith('https://')) {
-      if (!allowedOrigins.includes(cleaned)) {
-        allowedOrigins.push(cleaned);
-      }
-    } else {
-      const withHttps = `https://${cleaned}`;
-      if (!allowedOrigins.includes(withHttps)) {
-        allowedOrigins.push(withHttps);
-      }
-    }
-  }
-  
-  // Allow all Vercel preview URLs (pattern: *.vercel.app)
-  allowedOrigins.push(/^https:\/\/.*\.vercel\.app$/);
-  
-  return allowedOrigins;
-};
-
 app.use(cors({
   origin: (origin, callback) => {
-    const allowed = getAllowedOrigins();
-    
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) {
       return callback(null, true);
     }
     
-    // Check if origin matches any allowed pattern
-    const isAllowed = allowed.some(allowedOrigin => {
-      if (typeof allowedOrigin === 'string') {
-        return allowedOrigin === origin;
-      } else if (allowedOrigin instanceof RegExp) {
-        return allowedOrigin.test(origin);
-      }
-      return false;
-    });
+    // Always allow Vercel domains (production and preview)
+    const vercelPattern = /^https:\/\/.*\.vercel\.app$/;
     
-    if (isAllowed) {
+    // Check if it's a Vercel domain
+    if (vercelPattern.test(origin)) {
+      return callback(null, true);
+    }
+    
+    // Check if it matches the configured FRONTEND_URL
+    const frontendUrl = process.env.FRONTEND_URL;
+    if (frontendUrl) {
+      const cleaned = frontendUrl.trim().replace(/[^\w\s\-.:\/]/g, '');
+      let configuredUrl = cleaned;
+      
+      if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://')) {
+        configuredUrl = `https://${cleaned}`;
+      }
+      
+      if (origin === configuredUrl) {
+        return callback(null, true);
+      }
+    }
+    
+    // Default: allow all in development, deny in production
+    if (process.env.NODE_ENV === 'development') {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
