@@ -26,7 +26,9 @@ contactRouter.post('/', async (req, res) => {
     // Use Resend if API key is available, otherwise fall back to SMTP
     if (process.env.RESEND_API_KEY) {
       console.log('Using Resend for email delivery');
-      // Send email via Resend (this will send both the notification to you and confirmation to sender)
+      console.log('Recipient email:', process.env.RECIPIENT_EMAIL);
+      
+      // Send notification email to recipient (you)
       await sendContactEmailResend({
         name,
         phone,
@@ -34,6 +36,8 @@ contactRouter.post('/', async (req, res) => {
         service,
         message
       });
+      
+      // Send confirmation email to sender
       await sendConfirmationEmailResend({
         name,
         phone,

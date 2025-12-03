@@ -130,8 +130,11 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
 
   const recipientEmail = process.env.RECIPIENT_EMAIL;
   if (!recipientEmail) {
+    console.error('❌ RECIPIENT_EMAIL not configured in environment variables');
     throw new Error('Recipient email not configured');
   }
+  
+  console.log('📧 Sending notification email to recipient:', recipientEmail);
 
   try {
     await resend.emails.send({
