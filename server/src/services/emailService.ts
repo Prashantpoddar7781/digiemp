@@ -33,10 +33,19 @@ const createTransporter = () => {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+    // Connection timeout settings for Railway/production
+    connectionTimeout: 60000, // 60 seconds
+    greetingTimeout: 30000, // 30 seconds
+    socketTimeout: 60000, // 60 seconds
     // For services like Gmail, you might need:
     tls: {
-      rejectUnauthorized: false
-    }
+      rejectUnauthorized: false,
+      ciphers: 'SSLv3'
+    },
+    // Retry settings
+    pool: true,
+    maxConnections: 1,
+    maxMessages: 3
   });
 };
 
