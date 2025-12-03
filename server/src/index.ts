@@ -8,24 +8,57 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware - Fix CORS to handle invalid characters
-const getFrontendUrl = () => {
-  const url = process.env.FRONTEND_URL;
-  if (!url) return '*';
+// Middleware - Fix CORS to allow Vercel production and preview URLs
+const getAllowedOrigins = () => {
+  const frontendUrl = process.env.FRONTEND_URL;
+  const allowedOrigins = ['https://digiemp.vercel.app'];
   
-  // Remove any invalid characters and ensure it's a valid URL
-  const cleaned = url.trim().replace(/[^\w\s\-.:\/]/g, '');
-  
-  // If it doesn't start with http, add https://
-  if (!cleaned.startsWith('http://') && !cleaned.startsWith('https://')) {
-    return `https://${cleaned}`;
+  // Add production URL if provided
+  if (frontendUrl) {
+    const cleaned = frontendUrl.trim().replace(/[^\w\s\-.:\/]/g, '');
+    if (cleaned.startsWith('http://') || cleaned.startsWith('https://')) {
+      if (!allowedOrigins.includes(cleaned)) {
+        allowedOrigins.push(cleaned);
+      }
+    } else {
+      const withHttps = `https://${cleaned}`;
+      if (!allowedOrigins.includes(withHttps)) {
+        allowedOrigins.push(withHttps);
+      }
+    }
   }
   
-  return cleaned;
+  // Allow all Vercel preview URLs (pattern: *.vercel.app)
+  allowedOrigins.push(/^https:\/\/.*\.vercel\.app$/);
+  
+  return allowedOrigins;
 };
 
 app.use(cors({
-  origin: getFrontendUrl(),
+  origin: (origin, callback) => {
+    const allowed = getAllowedOrigins();
+    
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) {
+      return callback(null, true);
+    }
+    
+    // Check if origin matches any allowed pattern
+    const isAllowed = allowed.some(allowedOrigin => {
+      if (typeof allowedOrigin === 'string') {
+        return allowedOrigin === origin;
+      } else if (allowedOrigin instanceof RegExp) {
+        return allowedOrigin.test(origin);
+      }
+      return false;
+    });
+    
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
