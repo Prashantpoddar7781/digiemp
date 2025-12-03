@@ -25,28 +25,38 @@ const createTransporter = () => {
   }
 
   // Standard SMTP configuration
-  return nodemailer.createTransport({
+  const port = parseInt(process.env.SMTP_PORT || '587');
+  const isSecure = process.env.SMTP_SECURE === 'true';
+  
+  const config: any = {
     host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
+    port: port,
+    secure: isSecure, // true for 465, false for other ports
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
     // Connection timeout settings for Railway/production
-    connectionTimeout: 60000, // 60 seconds
-    greetingTimeout: 30000, // 30 seconds
-    socketTimeout: 60000, // 60 seconds
-    // For services like Gmail, you might need:
-    tls: {
+    connectionTimeout: 10000, // 10 seconds (shorter for faster failure)
+    greetingTimeout: 5000, // 5 seconds
+    socketTimeout: 10000, // 10 seconds
+  };
+  
+  // For port 465 (SSL), use different TLS settings
+  if (isSecure && port === 465) {
+    config.tls = {
       rejectUnauthorized: false,
-      ciphers: 'SSLv3'
-    },
-    // Retry settings
-    pool: true,
-    maxConnections: 1,
-    maxMessages: 3
-  });
+      minVersion: 'TLSv1.2'
+    };
+  } else {
+    // For port 587 (TLS)
+    config.requireTLS = true;
+    config.tls = {
+      rejectUnauthorized: false
+    };
+  }
+  
+  return nodemailer.createTransport(config);
 };
 
 // Send confirmation email to the sender
