@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { sendContactEmail, sendConfirmationEmail } from '../services/emailService.js';
+import { sendContactEmailResend, sendConfirmationEmailResend } from '../services/emailServiceResend.js';
 import { validateContactForm } from '../validators/contactValidator.js';
 
 export const contactRouter = Router();
@@ -22,14 +23,35 @@ contactRouter.post('/', async (req, res) => {
 
     const { name, phone, email, service, message } = validationResult.data;
 
-    // Send email (this will send both the notification to you and confirmation to sender)
-    await sendContactEmail({
-      name,
-      phone,
-      email,
-      service,
-      message
-    });
+    // Use Resend if API key is available, otherwise fall back to SMTP
+    if (process.env.RESEND_API_KEY) {
+      console.log('Using Resend for email delivery');
+      // Send email via Resend (this will send both the notification to you and confirmation to sender)
+      await sendContactEmailResend({
+        name,
+        phone,
+        email,
+        service,
+        message
+      });
+      await sendConfirmationEmailResend({
+        name,
+        phone,
+        email,
+        service,
+        message
+      });
+    } else {
+      console.log('Using SMTP for email delivery');
+      // Send email via SMTP (this will send both the notification to you and confirmation to sender)
+      await sendContactEmail({
+        name,
+        phone,
+        email,
+        service,
+        message
+      });
+    }
 
     res.json({
       success: true,
