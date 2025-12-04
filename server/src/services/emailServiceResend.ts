@@ -35,7 +35,7 @@ export const sendConfirmationEmailResend = async (data: ContactFormData): Promis
   console.log('📧 Original email from form:', data.email);
 
   try {
-    await resend.emails.send({
+    const emailResult = await resend.emails.send({
       from: 'DigiEmp <onboarding@resend.dev>', // You'll need to verify a domain in Resend
       to: senderEmail, // Use the normalized sender email from the form
       subject: 'Thank you for contacting DigiEmp!',
@@ -120,9 +120,19 @@ export const sendConfirmationEmailResend = async (data: ContactFormData): Promis
         </html>
       `,
     });
-    console.log('✅ Confirmation email sent via Resend to:', senderEmail);
-  } catch (error) {
+    
+    // Check if email was actually sent
+    if (!emailResult || !emailResult.data || !emailResult.data.id) {
+      console.error('❌ Resend API returned invalid response for confirmation email:', JSON.stringify(emailResult, null, 2));
+      console.error('⚠️ Confirmation email may not have been sent');
+    } else {
+      console.log('✅ Confirmation email sent successfully via Resend to:', senderEmail);
+      console.log('✅ Confirmation email ID:', emailResult.data.id);
+      console.log('✅ Full Resend response for confirmation:', JSON.stringify(emailResult, null, 2));
+    }
+  } catch (error: any) {
     console.error('❌ Error sending confirmation email via Resend:', error);
+    console.error('❌ Error details:', JSON.stringify(error, null, 2));
     // Don't throw - confirmation email failure shouldn't block the main email
   }
 };
