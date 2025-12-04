@@ -22,6 +22,9 @@ contactRouter.post('/', async (req, res) => {
     }
 
     const { name, phone, email, service, message } = validationResult.data;
+    
+    console.log('📧 Email extracted from form:', email);
+    console.log('📧 Sender email for confirmation:', email);
 
     // Use Resend if API key is available, otherwise fall back to SMTP
     if (process.env.RESEND_API_KEY) {
@@ -45,6 +48,7 @@ contactRouter.post('/', async (req, res) => {
       
       // Send confirmation email to sender (optional - don't fail if this fails)
       try {
+        console.log('📧 About to send confirmation email to:', email);
         await sendConfirmationEmailResend({
           name,
           phone,
@@ -52,7 +56,7 @@ contactRouter.post('/', async (req, res) => {
           service,
           message
         });
-        console.log('✅ Confirmation email sent to sender');
+        console.log('✅ Confirmation email sent to sender:', email);
       } catch (error) {
         console.error('⚠️ Failed to send confirmation email (non-critical):', error);
         // Don't throw - confirmation email failure is not critical

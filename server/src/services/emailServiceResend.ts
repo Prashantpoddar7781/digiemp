@@ -29,10 +29,15 @@ export const sendConfirmationEmailResend = async (data: ContactFormData): Promis
     throw new Error('RESEND_API_KEY not configured');
   }
 
+  // Normalize the sender's email from the form
+  const senderEmail = data.email.toLowerCase().trim();
+  console.log('📧 Sending confirmation email to sender:', senderEmail);
+  console.log('📧 Original email from form:', data.email);
+
   try {
     await resend.emails.send({
       from: 'DigiEmp <onboarding@resend.dev>', // You'll need to verify a domain in Resend
-      to: data.email.toLowerCase().trim(), // Normalize email address
+      to: senderEmail, // Use the normalized sender email from the form
       subject: 'Thank you for contacting DigiEmp!',
       html: `
         <!DOCTYPE html>
@@ -115,7 +120,7 @@ export const sendConfirmationEmailResend = async (data: ContactFormData): Promis
         </html>
       `,
     });
-    console.log('✅ Confirmation email sent via Resend to:', data.email);
+    console.log('✅ Confirmation email sent via Resend to:', senderEmail);
   } catch (error) {
     console.error('❌ Error sending confirmation email via Resend:', error);
     // Don't throw - confirmation email failure shouldn't block the main email
