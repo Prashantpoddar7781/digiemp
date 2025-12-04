@@ -10,7 +10,6 @@ import {
   Code2, 
   LayoutDashboard, 
   PlayCircle,
-  Sparkles,
   Mail,
   Github,
   Linkedin,
@@ -35,7 +34,6 @@ import {
   Palette,
   Phone
 } from 'lucide-react';
-import { AIConsultant } from './components/AIConsultant';
 import { ServiceCategory } from './types';
 
 // Constants for component reuse
@@ -285,7 +283,6 @@ const BakeryTeaserPreview = () => {
 
 const App = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAIChatOpen, setIsAIChatOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('all');
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
@@ -374,13 +371,6 @@ const App = () => {
               <button onClick={() => scrollToSection('pricing')} className="text-sm font-medium hover:text-indigo-400 transition-colors">Pricing</button>
               <button onClick={() => scrollToSection('portfolio')} className="text-sm font-medium hover:text-indigo-400 transition-colors">Work</button>
               <button onClick={() => scrollToSection('contact')} className="text-sm font-medium hover:text-indigo-400 transition-colors">Contact</button>
-              <button 
-                onClick={() => setIsAIChatOpen(true)}
-                className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/40"
-              >
-                <Sparkles className="w-4 h-4" />
-                AI Consultant
-              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -401,13 +391,6 @@ const App = () => {
               <button onClick={() => scrollToSection('pricing')} className="block w-full text-left py-3 px-2 hover:bg-slate-800 rounded-lg text-slate-300">Pricing</button>
               <button onClick={() => scrollToSection('portfolio')} className="block w-full text-left py-3 px-2 hover:bg-slate-800 rounded-lg text-slate-300">Work</button>
               <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-3 px-2 hover:bg-slate-800 rounded-lg text-slate-300">Contact</button>
-              <button 
-                onClick={() => { setIsAIChatOpen(true); setIsMobileMenuOpen(false); }}
-                className="w-full mt-4 flex items-center justify-center gap-2 bg-indigo-600 text-white py-3 rounded-lg font-medium"
-              >
-                <Sparkles className="w-4 h-4" />
-                Ask AI Consultant
-              </button>
             </div>
           </div>
         )}
@@ -578,22 +561,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* Feature Strip - Why AI? */}
-      <section className="py-16 border-y border-slate-800 bg-slate-950">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex-1">
-            <h3 className="text-2xl font-bold text-white mb-2 font-display">Unsure what you need?</h3>
-            <p className="text-slate-400">Our AI Project Consultant can analyze your business goals and suggest the perfect tech stack.</p>
-          </div>
-          <button 
-            onClick={() => setIsAIChatOpen(true)}
-            className="flex-shrink-0 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-8 py-4 rounded-xl font-semibold transition-all flex items-center gap-3 shadow-lg"
-          >
-            <Sparkles className="w-5 h-5" />
-            Talk to AI Consultant
-          </button>
-        </div>
-      </section>
 
       {/* Portfolio Section */}
       <section id="portfolio" className="py-24">
@@ -841,8 +808,6 @@ const App = () => {
         </div>
       </footer>
 
-      {/* AI Consultant Modal */}
-      <AIConsultant isOpen={isAIChatOpen} onClose={() => setIsAIChatOpen(false)} />
     </div>
   );
 };
