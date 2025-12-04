@@ -1,7 +1,8 @@
-import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
+// Use Vite environment variable for client-side
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
+// Initialize Gemini AI - using @google/genai package
+let genAI: any = null;
 
 const SYSTEM_INSTRUCTION = `
 You are "Digi", a senior technical consultant for DigiEmp, a digital agency specializing in:
@@ -27,9 +28,21 @@ export const sendMessageToGemini = async (
     return "I'm sorry, my AI connection is currently offline (Missing API Key). Please contact the team directly.";
   }
 
+  // Initialize Gemini AI if not already initialized
+  if (!genAI && apiKey) {
+    try {
+      const { GoogleGenAI } = await import('@google/genai');
+      genAI = new GoogleGenAI({ apiKey });
+    } catch (error) {
+      console.error("Failed to initialize Gemini:", error);
+      return "I'm having trouble initializing the AI. Please refresh the page and try again.";
+    }
+  }
+
   try {
-    const chat = ai.chats.create({
-      model: 'gemini-2.5-flash',
+    // Use @google/genai API
+    const chat = genAI.chats.create({
+      model: 'gemini-2.0-flash-exp',
       config: {
         systemInstruction: SYSTEM_INSTRUCTION,
         temperature: 0.7,
@@ -37,10 +50,10 @@ export const sendMessageToGemini = async (
       history: history
     });
 
-    const result: GenerateContentResponse = await chat.sendMessage({ message });
+    const result = await chat.sendMessage({ message });
     return result.text || "I didn't catch that. Could you rephrase?";
-  } catch (error) {
+  } catch (error: any) {
     console.error("Gemini API Error:", error);
-    return "I'm having trouble connecting to the server right now. Please try again later.";
+    return `I'm having trouble connecting to the server right now. ${error.message || 'Please try again later.'}`;
   }
 };
