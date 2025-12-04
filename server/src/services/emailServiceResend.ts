@@ -174,7 +174,7 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
       from: fromAddress,
       to: normalizedRecipient, // Normalize email address
       reply_to: normalizedSender,
-      subject: `New Project Request from ${data.service}`,
+      subject: `New Project Request from ${data.name} - ${data.service}`,
       html: `
         <!DOCTYPE html>
         <html>
