@@ -34,9 +34,13 @@ export const sendConfirmationEmailResend = async (data: ContactFormData): Promis
   console.log('📧 Sending confirmation email to sender:', senderEmail);
   console.log('📧 Original email from form:', data.email);
 
+  // Use custom domain if configured, otherwise use Resend's test domain (limited to account owner)
+  const fromAddress = process.env.RESEND_FROM_EMAIL || 'DigiEmp <onboarding@resend.dev>';
+  console.log('📧 From address for confirmation:', fromAddress);
+
   try {
     const emailResult = await resend.emails.send({
-      from: 'DigiEmp <onboarding@resend.dev>', // You'll need to verify a domain in Resend
+      from: fromAddress,
       to: senderEmail, // Use the normalized sender email from the form
       subject: 'Thank you for contacting DigiEmp!',
       html: `
@@ -154,7 +158,10 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
   try {
     console.log('📧 Resend API Key present:', !!process.env.RESEND_API_KEY);
     console.log('📧 Sending to recipient:', recipientEmail);
-    console.log('📧 From address: DigiEmp <onboarding@resend.dev>');
+    
+    // Use custom domain if configured, otherwise use Resend's test domain (limited to account owner)
+    const fromAddress = process.env.RESEND_FROM_EMAIL || 'DigiEmp <onboarding@resend.dev>';
+    console.log('📧 From address:', fromAddress);
     console.log('📧 Subject: New Project Request from', data.name);
     
     const normalizedRecipient = recipientEmail.toLowerCase().trim();
@@ -164,10 +171,10 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
     console.log('📧 Normalized sender email:', normalizedSender);
     
     const emailResult = await resend.emails.send({
-      from: 'DigiEmp <onboarding@resend.dev>', // You'll need to verify a domain in Resend
+      from: fromAddress,
       to: normalizedRecipient, // Normalize email address
       reply_to: normalizedSender,
-      subject: `New Project Request from ${data.name} - ${data.service}`,
+      subject: `New Project Request from ${data.service}`,
       html: `
         <!DOCTYPE html>
         <html>
