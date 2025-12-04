@@ -142,10 +142,16 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
     console.log('📧 From address: DigiEmp <onboarding@resend.dev>');
     console.log('📧 Subject: New Project Request from', data.name);
     
+    const normalizedRecipient = recipientEmail.toLowerCase().trim();
+    const normalizedSender = data.email.toLowerCase().trim();
+    
+    console.log('📧 Normalized recipient email:', normalizedRecipient);
+    console.log('📧 Normalized sender email:', normalizedSender);
+    
     const emailResult = await resend.emails.send({
       from: 'DigiEmp <onboarding@resend.dev>', // You'll need to verify a domain in Resend
-      to: recipientEmail.toLowerCase().trim(), // Normalize email address
-      reply_to: data.email,
+      to: normalizedRecipient, // Normalize email address
+      reply_to: normalizedSender,
       subject: `New Project Request from ${data.name} - ${data.service}`,
       html: `
         <!DOCTYPE html>
@@ -258,9 +264,17 @@ export const sendContactEmailResend = async (data: ContactFormData): Promise<voi
         </html>
       `,
     });
-    console.log('✅ Notification email sent successfully via Resend to:', recipientEmail);
+    
+    // Check if email was actually sent
+    if (!emailResult || !emailResult.data || !emailResult.data.id) {
+      console.error('❌ Resend API returned invalid response:', JSON.stringify(emailResult, null, 2));
+      throw new Error('Resend API returned invalid response - email may not have been sent');
+    }
+    
+    console.log('✅ Notification email sent successfully via Resend to:', normalizedRecipient);
+    console.log('✅ Email ID:', emailResult.data.id);
     console.log('✅ Email subject: New Project Request from', data.name);
-    console.log('✅ Resend response:', JSON.stringify(emailResult, null, 2));
+    console.log('✅ Full Resend response:', JSON.stringify(emailResult, null, 2));
   } catch (error: any) {
     console.error('❌ Error sending email via Resend:', error);
     console.error('❌ Error details:', JSON.stringify(error, null, 2));
