@@ -19,8 +19,16 @@ app.use(cors({
     // Always allow Vercel domains (production and preview)
     const vercelPattern = /^https:\/\/.*\.vercel\.app$/;
     
+    // Always allow digiemp.in domain and subdomains
+    const digiempPattern = /^https:\/\/(www\.)?digiemp\.in$/;
+    
     // Check if it's a Vercel domain
     if (vercelPattern.test(origin)) {
+      return callback(null, true);
+    }
+    
+    // Check if it's digiemp.in domain
+    if (digiempPattern.test(origin)) {
       return callback(null, true);
     }
     
