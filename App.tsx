@@ -281,6 +281,65 @@ const BakeryTeaserPreview = () => {
 
 // --- Main App Component ---
 
+// Countdown Timer Component
+const CountdownTimer = () => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      // Target date: Dec 31, 2025 23:59:59 IST
+      const targetDate = new Date('2025-12-31T23:59:59+05:30');
+      const now = new Date();
+      const difference = targetDate.getTime() - now.getTime();
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    calculateTimeLeft();
+    const interval = setInterval(calculateTimeLeft, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex items-center gap-2 text-sm">
+      <div className="flex flex-col items-center bg-slate-800 rounded-lg px-3 py-2 border border-slate-700">
+        <span className="text-2xl font-bold text-white">{String(timeLeft.days).padStart(2, '0')}</span>
+        <span className="text-xs text-slate-400">Days</span>
+      </div>
+      <span className="text-slate-500">:</span>
+      <div className="flex flex-col items-center bg-slate-800 rounded-lg px-3 py-2 border border-slate-700">
+        <span className="text-2xl font-bold text-white">{String(timeLeft.hours).padStart(2, '0')}</span>
+        <span className="text-xs text-slate-400">Hours</span>
+      </div>
+      <span className="text-slate-500">:</span>
+      <div className="flex flex-col items-center bg-slate-800 rounded-lg px-3 py-2 border border-slate-700">
+        <span className="text-2xl font-bold text-white">{String(timeLeft.minutes).padStart(2, '0')}</span>
+        <span className="text-xs text-slate-400">Mins</span>
+      </div>
+      <span className="text-slate-500">:</span>
+      <div className="flex flex-col items-center bg-slate-800 rounded-lg px-3 py-2 border border-slate-700">
+        <span className="text-2xl font-bold text-white">{String(timeLeft.seconds).padStart(2, '0')}</span>
+        <span className="text-xs text-slate-400">Secs</span>
+      </div>
+    </div>
+  );
+};
+
 const App = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<string>('all');
@@ -474,21 +533,49 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display">Transparent Pricing</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto">
+            <p className="text-slate-400 max-w-2xl mx-auto mb-6">
               Professional development at competitive rates. No hidden fees.
             </p>
+            <div className="flex flex-col items-center gap-4 mb-8">
+              <div className="bg-red-600/10 border border-red-500/30 rounded-xl px-6 py-4 inline-block">
+                <p className="text-red-400 font-semibold text-lg mb-2">Launch Offer: Only ₹1,999 — Valid Until 31st December</p>
+                <p className="text-slate-300 text-sm max-w-2xl">
+                  To celebrate the launch of our web development services, we're offering complete website development at a special introductory price of ₹1,999.
+                </p>
+                <p className="text-slate-400 text-xs mt-2">
+                  This limited-time offer ends on 31st December. Don't miss out!
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <p className="text-xs text-slate-500 uppercase tracking-wider">Time Remaining</p>
+                <CountdownTimer />
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
             {/* Card 1: Web */}
-            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-indigo-500/30 transition-all hover:-translate-y-1 duration-300">
+            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-indigo-500/30 transition-all hover:-translate-y-1 duration-300 relative">
+              <div className="absolute -top-3 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
+                Launch Offer
+              </div>
               <div className="mb-4 p-3 bg-indigo-500/10 w-fit rounded-xl">
                 <Monitor className="w-6 h-6 text-indigo-400" />
               </div>
               <h3 className="text-xl font-bold text-white font-display mb-2">Websites & Apps</h3>
-              <p className="text-slate-400 text-sm mb-6 h-10">E-commerce, SaaS, Portfolios, and Landing Pages.</p>
-              <div className="text-4xl font-bold text-white mb-1">₹1,999<span className="text-lg text-slate-500 font-normal">/project</span></div>
-              <p className="text-xs text-slate-500 mb-8">One-time payment</p>
+              <p className="text-slate-400 text-sm mb-4">E-commerce, SaaS, Portfolios, and Landing Pages.</p>
+              <div className="mb-4">
+                <div className="text-4xl font-bold text-white mb-1">₹1,999<span className="text-lg text-slate-500 font-normal">/project</span></div>
+                <p className="text-xs text-red-400 font-medium mb-2">Valid Until 31st December</p>
+              </div>
+              <div className="bg-slate-800/50 rounded-xl p-4 mb-6 border border-slate-700">
+                <p className="text-xs text-slate-300 leading-relaxed mb-2">
+                  To celebrate the launch of our web development services, we're offering complete website development at a special introductory price of ₹1,999.
+                </p>
+                <p className="text-xs text-slate-400">
+                  This limited-time offer ends on 31st December. Prices will revert to ₹14,999 post-offer. Don't miss out!
+                </p>
+              </div>
               <button onClick={() => scrollToSection('contact')} className="w-full py-3 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-medium transition-all mb-8">Get Started</button>
               <div className="space-y-3 border-t border-slate-800 pt-6">
                 <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-indigo-500" /> Complete Functional Product</div>
@@ -499,8 +586,8 @@ const App = () => {
 
             {/* Card 2: Dashboards - Highlighted */}
             <div className="bg-slate-950 border border-indigo-500/50 rounded-3xl p-8 flex flex-col relative shadow-[0_0_30px_rgba(79,70,229,0.1)] hover:-translate-y-1 transition-all duration-300">
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-500 text-white px-4 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
-                Most Popular
+              <div className="absolute -top-3 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
+                Launch Offer
               </div>
               <div className="mb-4 p-3 bg-emerald-500/10 w-fit rounded-xl">
                 <BarChart3 className="w-6 h-6 text-emerald-400" />
