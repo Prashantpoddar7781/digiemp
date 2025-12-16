@@ -96,7 +96,7 @@ const PORTFOLIO = [
     id: '4',
     title: 'Kurti Times',
     category: 'Web & Apps',
-    image: '', 
+    image: '/kurtitimes-homepage.png', 
     tag: 'Modern Web Platform',
     link: 'https://kurtitimes.vercel.app/'
   },
@@ -104,7 +104,7 @@ const PORTFOLIO = [
     id: '5',
     title: 'Stock Analyst',
     category: 'Web & Apps',
-    image: '', 
+    image: '/stockanalyst-homepage.png', 
     tag: 'Financial Analytics',
     link: 'https://stockanalyst-six.vercel.app/'
   }
