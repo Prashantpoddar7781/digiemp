@@ -91,6 +91,22 @@ const PORTFOLIO = [
     image: '', 
     tag: 'Motion Design'
     // link intentionally omitted
+  },
+  {
+    id: '4',
+    title: 'Kurti Times',
+    category: 'Web & Apps',
+    image: '', 
+    tag: 'Modern Web Platform',
+    link: 'https://kurtitimes.vercel.app/'
+  },
+  {
+    id: '5',
+    title: 'Stock Analyst',
+    category: 'Web & Apps',
+    image: '', 
+    tag: 'Financial Analytics',
+    link: 'https://stockanalyst-six.vercel.app/'
   }
 ];
 
