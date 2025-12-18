@@ -540,131 +540,6 @@ const App = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="py-24 relative overflow-hidden">
-        {/* Background blobs */}
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px] -translate-y-1/2 -z-10"></div>
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-[100px] -translate-y-1/2 -z-10"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display">Transparent Pricing</h2>
-            <p className="text-slate-400 max-w-2xl mx-auto mb-6">
-              Professional development at competitive rates. No hidden fees.
-            </p>
-            <div className="flex flex-col items-center gap-4 mb-8">
-              <div className="bg-red-600/10 border border-red-500/30 rounded-xl px-6 py-4 inline-block">
-                <p className="text-red-400 font-semibold text-lg mb-2">Launch Offer: Only ₹1,999 — Valid Until 31st December</p>
-                <p className="text-slate-300 text-sm max-w-2xl">
-                  To celebrate the launch of our web development services, we're offering complete website development at a special introductory price of ₹1,999.
-                </p>
-                <p className="text-slate-400 text-xs mt-2">
-                  This limited-time offer ends on 31st December. Don't miss out!
-                </p>
-              </div>
-              <div className="flex flex-col items-center gap-2">
-                <p className="text-xs text-slate-500 uppercase tracking-wider">Time Remaining</p>
-                <CountdownTimer />
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-            {/* Card 1: Web */}
-            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-indigo-500/30 transition-all hover:-translate-y-1 duration-300 relative">
-              <div className="absolute -top-3 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
-                Launch Offer
-              </div>
-              <div className="mb-4 p-3 bg-indigo-500/10 w-fit rounded-xl">
-                <Monitor className="w-6 h-6 text-indigo-400" />
-              </div>
-              <h3 className="text-xl font-bold text-white font-display mb-2">Websites & Apps</h3>
-              <p className="text-slate-400 text-sm mb-4">E-commerce, SaaS, Portfolios, and Landing Pages.</p>
-              <div className="mb-4">
-                <div className="text-4xl font-bold text-white mb-1">₹1,999<span className="text-lg text-slate-500 font-normal">/project</span></div>
-                <p className="text-xs text-red-400 font-medium mb-2">Valid Until 31st December</p>
-              </div>
-              <div className="bg-slate-800/50 rounded-xl p-4 mb-6 border border-slate-700">
-                <p className="text-xs text-slate-300 leading-relaxed mb-2">
-                  To celebrate the launch of our web development services, we're offering complete website development at a special introductory price of ₹1,999.
-                </p>
-                <p className="text-xs text-slate-400">
-                  This limited-time offer ends on 31st December. Prices will revert to ₹14,999 post-offer. Don't miss out!
-                </p>
-              </div>
-              <button onClick={() => scrollToSection('contact')} className="w-full py-3 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-medium transition-all mb-8">Get Started</button>
-              <div className="space-y-3 border-t border-slate-800 pt-6">
-                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-indigo-500" /> Complete Functional Product</div>
-                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-indigo-500" /> Source Code Ownership</div>
-                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-indigo-500" /> Mobile Responsive</div>
-              </div>
-            </div>
-
-            {/* Card 2: Dashboards - Highlighted */}
-            <div className="bg-slate-950 border border-indigo-500/50 rounded-3xl p-8 flex flex-col relative shadow-[0_0_30px_rgba(79,70,229,0.1)] hover:-translate-y-1 transition-all duration-300">
-              <div className="absolute -top-3 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
-                Launch Offer
-              </div>
-              <div className="mb-4 p-3 bg-emerald-500/10 w-fit rounded-xl">
-                <BarChart3 className="w-6 h-6 text-emerald-400" />
-              </div>
-              <h3 className="text-xl font-bold text-white font-display mb-2">Dashboards & Tools</h3>
-              <p className="text-slate-400 text-sm mb-6 h-10">CRM, Analytics, and Business Intelligence Tools.</p>
-              <div className="text-4xl font-bold text-white mb-1">₹1,499<span className="text-lg text-slate-500 font-normal">/project</span></div>
-              <p className="text-xs text-slate-500 mb-8">One-time payment</p>
-              <button onClick={() => scrollToSection('contact')} className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-all mb-8 shadow-lg shadow-indigo-500/25">Get Started</button>
-              <div className="space-y-3 border-t border-slate-800 pt-6">
-                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Data Visualization</div>
-                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Automation Scripts</div>
-                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Admin Panels</div>
-              </div>
-            </div>
-
-            {/* Card 3: Video */}
-            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-rose-500/30 transition-all hover:-translate-y-1 duration-300">
-              <div className="mb-4 p-3 bg-rose-500/10 w-fit rounded-xl">
-                <Video className="w-6 h-6 text-rose-400" />
-              </div>
-              <h3 className="text-xl font-bold text-white font-display mb-2">Video & Content</h3>
-              <p className="text-slate-400 text-sm mb-6 h-10">Promotional, Tutorial, and Animated Content.</p>
-              <div className="text-4xl font-bold text-white mb-1">₹40<span className="text-lg text-slate-500 font-normal">/sec</span></div>
-              <p className="text-xs text-slate-500 mb-8">Pay per duration</p>
-              <button onClick={() => scrollToSection('contact')} className="w-full py-3 rounded-xl bg-slate-800 hover:bg-rose-600 text-white font-medium transition-all mb-8">Get Started</button>
-              <div className="space-y-3 border-t border-slate-800 pt-6">
-                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-rose-500" /> High Quality Animation</div>
-                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-rose-500" /> Script Assistance</div>
-                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-rose-500" /> Professional Voiceover</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Guarantee Grid */}
-          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12">
-             <div className="text-center mb-10">
-               <h3 className="text-2xl font-bold text-white mb-2 font-display">The DigiEmp Guarantee</h3>
-               <p className="text-slate-400">We don't just deliver code; we deliver peace of mind.</p>
-             </div>
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
-                {GUARANTEES.map((g, i) => (
-                  <div key={i} className="flex gap-4">
-                     <div className="flex-shrink-0 mt-1">
-                        <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center">
-                          <g.icon className="w-5 h-5 text-indigo-400" />
-                        </div>
-                     </div>
-                     <div>
-                        <h4 className="font-bold text-white mb-1">{g.title}</h4>
-                        <p className="text-sm text-slate-400 leading-relaxed">{g.desc}</p>
-                     </div>
-                  </div>
-                ))}
-             </div>
-          </div>
-
-        </div>
-      </section>
-
-
       {/* Portfolio Section */}
       <section id="portfolio" className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -749,6 +624,130 @@ const App = () => {
               </Container>
             )})}
           </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-24 relative overflow-hidden">
+        {/* Background blobs */}
+        <div className="absolute top-1/2 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-[100px] -translate-y-1/2 -z-10"></div>
+        <div className="absolute top-1/2 right-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-[100px] -translate-y-1/2 -z-10"></div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-display">Transparent Pricing</h2>
+            <p className="text-slate-400 max-w-2xl mx-auto mb-6">
+              Professional development at competitive rates. No hidden fees.
+            </p>
+            <div className="flex flex-col items-center gap-4 mb-8">
+              <div className="bg-red-600/10 border border-red-500/30 rounded-xl px-6 py-4 inline-block">
+                <p className="text-red-400 font-semibold text-lg mb-2">Launch Offer: Only ₹2,999 — Valid Until 31st December</p>
+                <p className="text-slate-300 text-sm max-w-2xl">
+                  To celebrate the launch of our web development services, we're offering complete website development at a special introductory price of ₹2,999.
+                </p>
+                <p className="text-slate-400 text-xs mt-2">
+                  This limited-time offer ends on 31st December. Don't miss out!
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <p className="text-xs text-slate-500 uppercase tracking-wider">Time Remaining</p>
+                <CountdownTimer />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+            {/* Card 1: Web */}
+            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-indigo-500/30 transition-all hover:-translate-y-1 duration-300 relative">
+              <div className="absolute -top-3 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
+                Launch Offer
+              </div>
+              <div className="mb-4 p-3 bg-indigo-500/10 w-fit rounded-xl">
+                <Monitor className="w-6 h-6 text-indigo-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white font-display mb-2">Websites & Apps</h3>
+              <p className="text-slate-400 text-sm mb-4">E-commerce, SaaS, Portfolios, and Landing Pages.</p>
+              <div className="mb-4">
+                <div className="text-4xl font-bold text-white mb-1">₹2,999<span className="text-lg text-slate-500 font-normal">/project</span></div>
+                <p className="text-xs text-red-400 font-medium mb-2">Valid Until 31st December</p>
+              </div>
+              <div className="bg-slate-800/50 rounded-xl p-4 mb-6 border border-slate-700">
+                <p className="text-xs text-slate-300 leading-relaxed mb-2">
+                  To celebrate the launch of our web development services, we're offering complete website development at a special introductory price of ₹2,999.
+                </p>
+                <p className="text-xs text-slate-400">
+                  This limited-time offer ends on 31st December. Prices will revert to ₹7,999 post-offer. Don't miss out!
+                </p>
+              </div>
+              <button onClick={() => scrollToSection('contact')} className="w-full py-3 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-medium transition-all mb-8">Get Started</button>
+              <div className="space-y-3 border-t border-slate-800 pt-6">
+                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-indigo-500" /> Complete Functional Product</div>
+                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-indigo-500" /> Source Code Ownership</div>
+                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-indigo-500" /> Mobile Responsive</div>
+              </div>
+            </div>
+
+            {/* Card 2: Dashboards - Highlighted */}
+            <div className="bg-slate-950 border border-indigo-500/50 rounded-3xl p-8 flex flex-col relative shadow-[0_0_30px_rgba(79,70,229,0.1)] hover:-translate-y-1 transition-all duration-300">
+              <div className="absolute -top-3 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase">
+                Launch Offer
+              </div>
+              <div className="mb-4 p-3 bg-emerald-500/10 w-fit rounded-xl">
+                <BarChart3 className="w-6 h-6 text-emerald-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white font-display mb-2">Dashboards & Tools</h3>
+              <p className="text-slate-400 text-sm mb-6 h-10">CRM, Analytics, and Business Intelligence Tools.</p>
+              <div className="text-4xl font-bold text-white mb-1">₹1,499<span className="text-lg text-slate-500 font-normal">/project</span></div>
+              <p className="text-xs text-slate-500 mb-8">One-time payment</p>
+              <button onClick={() => scrollToSection('contact')} className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-medium transition-all mb-8 shadow-lg shadow-indigo-500/25">Get Started</button>
+              <div className="space-y-3 border-t border-slate-800 pt-6">
+                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Data Visualization</div>
+                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Automation Scripts</div>
+                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-emerald-500" /> Admin Panels</div>
+              </div>
+            </div>
+
+            {/* Card 3: Video */}
+            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-rose-500/30 transition-all hover:-translate-y-1 duration-300">
+              <div className="mb-4 p-3 bg-rose-500/10 w-fit rounded-xl">
+                <Video className="w-6 h-6 text-rose-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white font-display mb-2">Video & Content</h3>
+              <p className="text-slate-400 text-sm mb-6 h-10">Promotional, Tutorial, and Animated Content.</p>
+              <div className="text-4xl font-bold text-white mb-1">₹40<span className="text-lg text-slate-500 font-normal">/sec</span></div>
+              <p className="text-xs text-slate-500 mb-8">Pay per duration</p>
+              <button onClick={() => scrollToSection('contact')} className="w-full py-3 rounded-xl bg-slate-800 hover:bg-rose-600 text-white font-medium transition-all mb-8">Get Started</button>
+              <div className="space-y-3 border-t border-slate-800 pt-6">
+                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-rose-500" /> High Quality Animation</div>
+                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-rose-500" /> Script Assistance</div>
+                <div className="flex items-center gap-3 text-sm text-slate-300"><CheckCircle2 className="w-4 h-4 text-rose-500" /> Professional Voiceover</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Guarantee Grid */}
+          <div className="bg-slate-900 border border-slate-800 rounded-3xl p-8 md:p-12">
+             <div className="text-center mb-10">
+               <h3 className="text-2xl font-bold text-white mb-2 font-display">The DigiEmp Guarantee</h3>
+               <p className="text-slate-400">We don't just deliver code; we deliver peace of mind.</p>
+             </div>
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+                {GUARANTEES.map((g, i) => (
+                  <div key={i} className="flex gap-4">
+                     <div className="flex-shrink-0 mt-1">
+                        <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center">
+                          <g.icon className="w-5 h-5 text-indigo-400" />
+                        </div>
+                     </div>
+                     <div>
+                        <h4 className="font-bold text-white mb-1">{g.title}</h4>
+                        <p className="text-sm text-slate-400 leading-relaxed">{g.desc}</p>
+                     </div>
+                  </div>
+                ))}
+             </div>
+          </div>
+
         </div>
       </section>
 
