@@ -98,6 +98,14 @@ const PORTFOLIO = [
     image: '/stockanalyst-homepage.png', 
     tag: 'Financial Analytics',
     link: 'https://stockanalyst-six.vercel.app/'
+  },
+  {
+    id: '6',
+    title: 'Gavyansh',
+    category: 'Web & Apps',
+    image: '', 
+    tag: 'Modern Web Platform',
+    link: 'https://www.gavyansh.com/'
   }
 ];
 
@@ -491,11 +499,17 @@ const App = () => {
                   ) : (
                     <>
                       <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors z-10"></div>
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
-                      />
+                      {item.image ? (
+                        <img 
+                          src={item.image} 
+                          alt={item.title}
+                          className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-slate-800 text-slate-500">
+                          <Monitor className="w-12 h-12 opacity-30" />
+                        </div>
+                      )}
                     </>
                   )}
                   {/* Hover Overlay Icon - Only show if it's a link */}
