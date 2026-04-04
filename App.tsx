@@ -76,6 +76,14 @@ const PORTFOLIO = [
     link: 'https://venturepulse-inr.vercel.app/'
   },
   {
+    id: '6',
+    title: 'Gavyansh',
+    category: 'Web & Apps',
+    image: '', 
+    tag: 'Modern Web Platform',
+    link: 'https://www.gavyansh.com/'
+  },
+  {
     id: '2',
     title: 'Textile Webapp',
     category: 'Web & Apps',
@@ -98,14 +106,6 @@ const PORTFOLIO = [
     image: '/stockanalyst-homepage.png', 
     tag: 'Financial Analytics',
     link: 'https://stockanalyst-six.vercel.app/'
-  },
-  {
-    id: '6',
-    title: 'Gavyansh',
-    category: 'Web & Apps',
-    image: '', 
-    tag: 'Modern Web Platform',
-    link: 'https://www.gavyansh.com/'
   }
 ];
 
