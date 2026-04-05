@@ -111,3 +111,11 @@ GEMINI_API_KEY=your-gemini-api-key
 - Hard refresh browser: `Ctrl + Shift + R`
 - Check browser console for errors
 
+
+
+
+
+
+
+
+

@@ -40,3 +40,11 @@ EXPOSE 3000 5000
 
 CMD ["pm2-runtime", "ecosystem.config.json"]
 
+
+
+
+
+
+
+
+

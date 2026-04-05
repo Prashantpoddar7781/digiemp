@@ -217,3 +217,11 @@ After everything is set up:
 - [ ] Tested contact form with different email
 - [ ] Both emails working (notification + confirmation)
 
+
+
+
+
+
+
+
+

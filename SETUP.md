@@ -157,3 +157,11 @@ If you encounter issues:
 3. Check console logs for errors
 4. Review DEPLOYMENT.md for production setup
 
+
+
+
+
+
+
+
+

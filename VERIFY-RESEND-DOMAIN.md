@@ -70,3 +70,11 @@ Just add the DNS records for the subdomain instead.
 - Resend Docs: https://resend.com/docs/dashboard/domains/introduction
 - Resend Support: Check their help section
 
+
+
+
+
+
+
+
+

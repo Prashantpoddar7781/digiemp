@@ -79,7 +79,7 @@ const PORTFOLIO = [
     id: '6',
     title: 'Gavyansh',
     category: 'Web & Apps',
-    image: '', 
+    image: '/gavyansh-homepage.png', 
     tag: 'Modern Web Platform',
     link: 'https://www.gavyansh.com/'
   },

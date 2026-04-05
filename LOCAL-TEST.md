@@ -132,3 +132,11 @@ Once email is working locally:
 3. ✅ Update environment variables in production
 4. ✅ Test production contact form
 
+
+
+
+
+
+
+
+
