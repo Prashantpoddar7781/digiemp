@@ -339,7 +339,7 @@ const App = () => {
     <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-indigo-500/30">
       
       {/* Navigation */}
-      <nav className="fixed w-full z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
+      <nav className="fixed w-full z-40 bg-[#050505]/70 backdrop-blur-2xl border-b border-white/5 shadow-2xl transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth'})}>
@@ -382,24 +382,30 @@ const App = () => {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-grid-pattern">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-indigo-600/20 blur-[120px] rounded-full -z-10 pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight leading-tight font-display">
-            We Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">Digital Empires</span>
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/20 blur-[150px] rounded-full -z-10 animate-blob mix-blend-screen pointer-events-none"></div>
+        <div className="absolute top-20 right-1/4 w-[400px] h-[400px] bg-fuchsia-600/20 blur-[150px] rounded-full -z-10 animate-blob mix-blend-screen pointer-events-none" style={{animationDelay: "2s"}}></div>
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-600/15 blur-[150px] rounded-full -z-10 animate-blob mix-blend-screen pointer-events-none" style={{animationDelay: "4s"}}></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 animate-float">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900/50 border border-white/10 text-slate-300 text-sm font-medium mb-8 backdrop-blur-md shadow-2xl">
+            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+            Elevating digital experiences
+          </div>
+          <h1 className="text-6xl md:text-8xl font-bold text-white mb-6 tracking-tighter leading-tight font-display drop-shadow-2xl">
+            We Build <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-fuchsia-400 to-indigo-400">Digital Empires</span>
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-400/90 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
             From high-conversion websites to complex business dashboards and cinematic video content. One team for your entire digital presence.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <button 
               onClick={() => scrollToSection('contact')}
-              className="w-full sm:w-auto px-8 py-4 bg-white text-slate-900 rounded-full font-semibold hover:bg-slate-200 transition-colors flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              className="w-full sm:w-auto px-8 py-4 bg-white text-slate-900 rounded-full font-bold hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_0_40px_rgba(255,255,255,0.3)]"
             >
               Start Project <ArrowRight className="w-4 h-4" />
             </button>
             <button 
               onClick={() => scrollToSection('pricing')}
-              className="w-full sm:w-auto px-8 py-4 bg-slate-800 text-white rounded-full font-semibold hover:bg-slate-700 transition-colors border border-slate-700"
+              className="w-full sm:w-auto px-8 py-4 bg-slate-900/40 backdrop-blur-xl text-white rounded-full font-semibold hover:bg-slate-800 hover:scale-105 active:scale-95 transition-all duration-300 border border-white/10 shadow-2xl"
             >
               View Pricing
             </button>
@@ -419,16 +425,17 @@ const App = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {SERVICES.map((service) => (
-              <div key={service.id} className="group relative bg-slate-950 border border-slate-800 rounded-2xl p-8 hover:border-indigo-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-indigo-500/10">
-                <div className={`w-14 h-14 rounded-xl mb-6 flex items-center justify-center transition-colors
-                  ${service.id === 'web' ? 'bg-indigo-500/10 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white' : ''}
-                  ${service.id === 'dash' ? 'bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white' : ''}
-                  ${service.id === 'vid' ? 'bg-rose-500/10 text-rose-400 group-hover:bg-rose-500 group-hover:text-white' : ''}
+              <div key={service.id} className="group relative bg-slate-900/30 backdrop-blur-xl border border-white/5 rounded-[2rem] p-8 hover:border-white/10 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_8px_40px_rgba(0,0,0,0.5)] overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <div className={`w-14 h-14 rounded-2xl mb-6 flex items-center justify-center transition-all duration-300 shadow-xl
+                  ${service.id === 'web' ? 'bg-indigo-500/10 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white group-hover:shadow-indigo-500/50' : ''}
+                  ${service.id === 'dash' ? 'bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white group-hover:shadow-emerald-500/50' : ''}
+                  ${service.id === 'vid' ? 'bg-rose-500/10 text-rose-400 group-hover:bg-rose-500 group-hover:text-white group-hover:shadow-rose-500/50' : ''}
                 `}>
                   <service.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-3 font-display">{service.title}</h3>
-                <p className="text-slate-400 mb-6 leading-relaxed">
+                <h3 className="text-2xl font-bold text-white mb-3 font-display relative">{service.title}</h3>
+                <p className="text-slate-400 mb-6 leading-relaxed relative">
                   {service.description}
                 </p>
                 <ul className="space-y-3">
@@ -491,7 +498,7 @@ const App = () => {
                 key={item.id} 
                 {...containerProps}
               >
-                <div className="relative overflow-hidden rounded-2xl aspect-[4/3] mb-4 bg-slate-900 border border-slate-800 shadow-lg group-hover:shadow-indigo-500/20 transition-all duration-300">
+                <div className="relative overflow-hidden rounded-[2rem] aspect-[4/3] mb-5 bg-slate-900/40 backdrop-blur-md border border-white/5 shadow-2xl group-hover:shadow-[0_0_40px_rgba(139,92,246,0.15)] group-hover:border-white/10 transition-all duration-500">
                   {item.id === '1' ? (
                      <VentureCollage />
                   ) : item.id === '2' ? (
@@ -556,7 +563,7 @@ const App = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
             {/* Card 1: Web */}
-            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-indigo-500/30 transition-all hover:-translate-y-1 duration-300 relative">
+            <div className="bg-slate-900/30 backdrop-blur-xl border border-white/5 rounded-[2.5rem] p-8 flex flex-col hover:border-indigo-400/30 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all hover:-translate-y-2 duration-500 relative">
               <div className="mb-4 p-3 bg-indigo-500/10 w-fit rounded-xl">
                 <Monitor className="w-6 h-6 text-indigo-400" />
               </div>
@@ -577,7 +584,7 @@ const App = () => {
             </div>
 
             {/* Card 2: Dashboards - Highlighted */}
-            <div className="bg-slate-950 border border-indigo-500/50 rounded-3xl p-8 flex flex-col relative shadow-[0_0_30px_rgba(79,70,229,0.1)] hover:-translate-y-1 transition-all duration-300">
+            <div className="bg-slate-900/80 backdrop-blur-2xl border border-indigo-500/30 rounded-[2.5rem] p-8 flex flex-col relative shadow-[0_0_50px_rgba(124,58,237,0.15)] hover:-translate-y-2 transition-all duration-500 md:scale-105 z-10">
               <div className="mb-4 p-3 bg-emerald-500/10 w-fit rounded-xl">
                 <BarChart3 className="w-6 h-6 text-emerald-400" />
               </div>
@@ -594,7 +601,7 @@ const App = () => {
             </div>
 
             {/* Card 3: Video */}
-            <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-3xl p-8 flex flex-col hover:border-rose-500/30 transition-all hover:-translate-y-1 duration-300">
+            <div className="bg-slate-900/30 backdrop-blur-xl border border-white/5 rounded-[2.5rem] p-8 flex flex-col hover:border-rose-400/30 hover:shadow-2xl hover:shadow-rose-500/10 transition-all hover:-translate-y-2 duration-500 relative">
               <div className="mb-4 p-3 bg-rose-500/10 w-fit rounded-xl">
                 <Video className="w-6 h-6 text-rose-400" />
               </div>
@@ -676,7 +683,7 @@ const App = () => {
             </div>
 
             {/* Right Column: Form */}
-            <div className="bg-slate-950 border border-slate-800 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+            <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 shadow-2xl relative overflow-hidden">
                <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-bl-full -z-10"></div>
               
               {formStatus === 'success' ? (
