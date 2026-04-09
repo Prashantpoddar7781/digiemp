@@ -570,7 +570,7 @@ const App = () => {
               <h3 className="text-xl font-bold text-white font-display mb-2">Websites & Apps</h3>
               <p className="text-slate-400 text-sm mb-4">E-commerce, SaaS, Portfolios, and Landing Pages.</p>
               <div className="mb-6">
-                <div className="text-4xl font-bold text-white mb-1">₹3,499<span className="text-lg text-slate-500 font-normal">/project</span></div>
+                <div className="text-4xl font-bold text-white mb-1">₹6,999<span className="text-lg text-slate-500 font-normal"> onwards</span></div>
                 <p className="text-xs text-slate-500">One-time payment</p>
               </div>
               <button onClick={() => scrollToSection('contact')} className="w-full py-3 rounded-xl bg-slate-800 hover:bg-indigo-600 text-white font-medium transition-all mb-8">Get Started</button>
